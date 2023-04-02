@@ -18,6 +18,7 @@ function LoginPage() {
             password:pass
         }).then((Response)=>{
             if (Response.status=200){
+                window.location='/home';
 
 
 
@@ -59,7 +60,7 @@ function LoginPage() {
                             
 
 
-                                    <button class="bg-[#002D74] text-white w-[95%] mt-3 p-2  rounded-2xl" onClick={login}><Link to={ islogin? `/home` :`/home` }>Submit</Link></button>
+                                    <button class="bg-[#002D74] text-white w-[95%] mt-3 p-2  rounded-2xl" onClick={login}>Submit</button>
 
                       
 

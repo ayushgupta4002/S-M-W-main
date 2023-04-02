@@ -34,6 +34,7 @@ app.post("/register", (req, res) => {
           }
           res.send(result)
           console.log(err)
+          
         });
 
 
@@ -64,11 +65,13 @@ app.post("/login", (req, res) => {
    
     db.query("SELECT * FROM login WHERE email=? AND password=?", [email, pass], (err, result) => {
       if (err) {
-        console.log(err)
+       throw(err)
       }
-      if (result.length > 0) {
+      if (result.length>0) {
+        
         res.send(result)
         console.log("logined")
+        
       } else {
         console.log("user doesn't exist");
       }
