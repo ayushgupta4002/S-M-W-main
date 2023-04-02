@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
+import { Await } from 'react-router-dom';
 
 
 function SignUp() {
@@ -8,13 +9,27 @@ function SignUp() {
     const baseurl = "http://localhost:8000";
     const [email, setemail] = useState("")
     const [pass, setpass] = useState("")
-    const register = () => {
-        axios.post(baseurl + "/register", {
-            email: email,
-            password: pass
-        }).then((Response) => {
-            console.log(Response)
-        })
+    const register = async() => {
+        try{
+
+           await axios.post(baseurl + "/register", {
+                email: email,
+                password: pass
+            }).then((Response) => {
+                if (Response.status=200){
+    
+    
+               console.log("success");
+                }
+               
+                console.log(Response)
+            })
+
+        }
+        catch(error){
+            console.log(error);
+        }
+       
 
     };
 
@@ -32,7 +47,7 @@ function SignUp() {
                                 Innovation begins Here !
                             </p>
                             <form action="" class="flex flex-col mr-3 mt-8 p-1 gap-4">
-                                <input class="p-1 pl-3 h-12 rounded-xl  " type="email" name="email" placeholder="Email" onChange={(e) => {
+                                <input class="p-1 pl-3 h-12 rounded-xl  " type="email" name="email" placeholder="Email" required='required' onChange={(e) => {
 
                                     setemail(e.target.value);
 
@@ -41,7 +56,7 @@ function SignUp() {
 
                                     setpass(e.target.value);
 
-                                }}></input>
+                                }} required="required" ></input>
                             </form>
 
 

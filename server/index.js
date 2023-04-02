@@ -2,14 +2,19 @@ const express = require('express');
 const db = require('./db')
 const cors = require('cors')
 var crypto = require("crypto");
-
+const { register } = require('./controllers/RegisterLogin');
+const routee = require('./routes/routes');
+const router = express.Router();
 const app = express();
 const PORT = 8000;
 app.use(cors());
 app.use(express.json())
 
 // Route to get all posts
-app.post("/register", (req, res) => {
+app.post("/register", (req, res) =>{
+
+
+
   try {
     var email = req.body.email
     var password = req.body.password
@@ -52,6 +57,8 @@ app.post("/register", (req, res) => {
     })
   };
 });
+
+app.use("/api/route",routee);
 
 
 app.post("/login", (req, res) => {
