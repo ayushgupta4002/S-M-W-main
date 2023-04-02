@@ -1,8 +1,37 @@
 import React from 'react'
 import { Link } from "react-router-dom";
+import { useState } from 'react';
+import axios from 'axios';
 
 function LoginPage() {
+    const baseurl="http://localhost:8000";
+    const [email, setemail] = useState("")
+    const [pass, setpass] = useState("")
+    const [islogin, setislogin] = useState(false)
+
+      
+
+
+    const  login=()=>{
+        axios.post(baseurl+"/login", {
+            email:email,
+            password:pass
+        }).then((Response)=>{
+            if (Response.status=200){
+
+
+
+           console.log("success");
+            }
+            console.log(Response)
+        })
+        
+    };
+    
+
+    
     return (
+
         <div>
     
         <body>
@@ -16,13 +45,21 @@ function LoginPage() {
                             Innovation begins Here !
                         </p>
                         <form action="" class="flex flex-col mr-3 mt-8 p-1 gap-4">
-                        <input class="p-1 pl-3 h-12 rounded-xl  " type="email" name="email" placeholder="Email"></input>
-                                <input class="p-1 pl-3 h-12 rounded-xl " type="password" name="password" placeholder="Password"></input>
+                        <input class="p-1 pl-3 h-12 rounded-xl  " type="email" name="email" placeholder="Email" onChange={(e)=>{
+
+                            setemail(e.target.value);
+
+                        }}></input>
+                                <input class="p-1 pl-3 h-12 rounded-xl " type="password" name="password" placeholder="Password" onChange={(e)=>{
+
+                                    setpass(e.target.value);
+
+                                }}></input>
                         </form>
                             
 
 
-                                    <button class="bg-[#002D74] text-white w-[95%] mt-3 p-2  rounded-2xl">Submit</button>
+                                    <button class="bg-[#002D74] text-white w-[95%] mt-3 p-2  rounded-2xl" onClick={login}><Link to={ islogin? `/home` :`/home` }>Submit</Link></button>
 
                       
 
