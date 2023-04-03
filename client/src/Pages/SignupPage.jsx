@@ -6,13 +6,13 @@ import { Await } from 'react-router-dom';
 
 function SignUp() {
 
-    const baseurl = "http://localhost:8000";
+    const baseurl = "http://localhost:8000/api/route";
     const [email, setemail] = useState("")
     const [pass, setpass] = useState("")
     const register = async() => {
         try{
 
-           await axios.post(baseurl + "/register", {
+            axios.post(baseurl + "/register", {
                 email: email,
                 password: pass
             }).then((Response) => {
@@ -27,7 +27,7 @@ function SignUp() {
 
         }
         catch(error){
-            console.log(error);
+            console.log(error.response.data);
         }
        
 
