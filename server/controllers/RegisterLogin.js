@@ -32,8 +32,9 @@ exports.register= async(req,res) =>{
         res.send(result)
         console.log("user exists")
       } else {
-        sendMail();
 
+        sendMail(email);
+        
         db.query("INSERT INTO login (email,password)  VALUES (?, ?)", [email, pass], (err, result) => {
           if (err) {
             console.log(err)
