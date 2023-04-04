@@ -7,6 +7,9 @@ import'./input.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProfilePage from './Pages/ProfilePage';
 import PostPage from './Pages/PostPage';
+import OTP from './Pages/Otp';
+
+
 
 function App() {
   return (
@@ -21,6 +24,8 @@ function App() {
       <Route path="/home" element={<Homepage/>} />
       <Route path="/profile" element={<ProfilePage/>} />
       <Route path="/post" element={<PostPage/>} />
+      <Route path="/otp" element={<OTP/>} />
+  
       </Routes>
     </main>
   </Router>

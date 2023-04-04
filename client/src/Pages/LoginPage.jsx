@@ -37,7 +37,7 @@ function LoginPage() {
     
         <body>
             <div class=" min-h-fit  flex item-center justify-center p-7 ">
-                <div class="bg-gray-100 flex flex rounded-2xl max-w-3xl p-5 flex-wrap shadow-xl">
+                <div class="bg-gray-200 flex flex rounded-2xl max-w-3xl p-5 flex-wrap shadow-xl">
                     <div class="w-1/2 md:w-full">
                         <h2 class="font-bold text-2xl">
                             Login

@@ -8,28 +8,33 @@ function SignUp() {
 
     const baseurl = "http://localhost:8000/api/route";
     const [email, setemail] = useState("")
+    const [name, setname] = useState("")
+    const [username, setusername] = useState("")
     const [pass, setpass] = useState("")
-    const register = async() => {
-        try{
+    const register = async () => {
+        try {
 
             axios.post(baseurl + "/register", {
                 email: email,
-                password: pass
+                password: pass,
+                name:name,
+                username:username
             }).then((Response) => {
-                if (Response.status=200){
-    
-    
-               console.log("success");
+                if (Response.status = 200) {
+                    window.location='/otp';
+
+
+                    console.log("success");
                 }
-               
+
                 console.log(Response)
             })
 
         }
-        catch(error){
+        catch (error) {
             console.log(error.response.data);
         }
-       
+
 
     };
 
@@ -38,7 +43,7 @@ function SignUp() {
 
             <body>
                 <div class=" min-h-fit  flex item-center justify-center p-7 ">
-                    <div class="bg-gray-100 flex flex rounded-2xl max-w-3xl p-5 flex-wrap shadow-xl">
+                    <div class="bg-gray-200 flex flex rounded-2xl max-w-3xl p-5 flex-wrap shadow-xl">
                         <div class="w-1/2 md:w-full">
                             <h2 class="font-bold text-2xl">
                                 SignUp
@@ -47,6 +52,16 @@ function SignUp() {
                                 Innovation begins Here !
                             </p>
                             <form action="" class="flex flex-col mr-3 mt-8 p-1 gap-4">
+                                <input class="p-1 pl-3 h-12 rounded-xl  " type="text" name="name" placeholder="Name" required='required' onChange={(e) => {
+
+                                    setname(e.target.value);
+
+                                }}></input>
+                                <input class="p-1 pl-3 h-12 rounded-xl  " type="text" name="username" placeholder="Username" required='required' onChange={(e) => {
+
+                                    setusername(e.target.value);
+
+                                }}></input>
                                 <input class="p-1 pl-3 h-12 rounded-xl  " type="email" name="email" placeholder="Email" required='required' onChange={(e) => {
 
                                     setemail(e.target.value);
@@ -70,9 +85,9 @@ function SignUp() {
                                 <p class="text-center">OR</p>
                                 <hr class="border-gray-400"></hr>
                             </div>
-                            <p class="bg-white items-center mt-5  rounded-l w-10/12 pt-2 pb-2 pl-2 pr-2 m-5 flex flex-row justify-evenly">
+                            <p class="bg-white items-center mt-5 border-black-400 rounded-l w-10/12 pt-2 pb-2 pl-2 pr-2 m-5 flex flex-row justify-evenly">
                                 {/* <img class="w-[11%]" src="google.png"></img> */}
-                                <p class=" text-gray-500 font-medium">Do a 9-5 Job</p></p>
+                                <a href='https://www.naukri.com/'><p class=" text-gray-500 font-medium">Do a 9-5 Job</p></a></p>
 
 
 
