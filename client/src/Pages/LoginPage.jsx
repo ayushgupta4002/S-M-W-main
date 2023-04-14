@@ -4,7 +4,7 @@ import { useState } from 'react';
 import axios from 'axios';
 
 function LoginPage() {
-    const baseurl="http://localhost:8000";
+    const baseurl="http://localhost:8000/api/route";
     const [email, setemail] = useState("")
     const [pass, setpass] = useState("")
     const [islogin, setislogin] = useState(false)

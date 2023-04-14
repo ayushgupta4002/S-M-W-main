@@ -29,7 +29,29 @@ function OTP() {
 
 
 };
+const resendotpfunction = async () => {
+    try {
 
+        axios.post(baseurl + "/resendotp", {
+         otp:otp
+        }).then((Response) => {
+            if (Response.status = 200) {
+               
+
+
+                console.log("otp resent");
+            }
+
+            console.log(Response)
+        })
+
+    }
+    catch (error) {
+        console.log(error.response.data);
+    }
+
+
+};
 
   return (
     <div>
@@ -56,7 +78,7 @@ function OTP() {
                       </div>
                       
                       <div class="flex justify-center text-center mt-5">
-                          <a class="flex items-center text-blue-700 hover:text-blue-900 cursor-pointer"><span class="font-bold">Resend OTP</span><i class='bx bx-caret-right ml-1'></i></a>
+                          <a class="flex items-center text-blue-700 hover:text-blue-900 cursor-pointer"><span class="font-bold" onClick={(resendotpfunction)}>Resend OTP</span><i class='bx bx-caret-right ml-1'></i></a>
                       </div>
                       <button class="bg-[#002D74] text-white w-[95%] mt-3 p-2  rounded-2xl" onClick={(otpfunction)}>Submit</button>
                      

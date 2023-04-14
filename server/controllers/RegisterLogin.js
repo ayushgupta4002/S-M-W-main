@@ -1,11 +1,15 @@
 const db = require('../db');
 var crypto = require("crypto");
 const sendMail = require('../utils/mailsender');
+const store = require("store2");
 
+exports.resendotp = async (req, res) => {
 
-exports.trying = async (req, res) => {
-  res.status(200).json({ message: "its all good" });
+  
 };
+
+
+
 exports.otpmain = async (req, res) => {
   try {
     
@@ -22,6 +26,7 @@ exports.otpmain = async (req, res) => {
             console.log(err)
           }
           console.log(result)
+          
         });
       }
     });
@@ -69,6 +74,8 @@ exports.register = async (req, res) => {
               res.send(result)
               console.log(err)
               sendMail(email);
+
+         
             });
           }
         });
@@ -85,3 +92,35 @@ exports.register = async (req, res) => {
 };
 
 
+exports.login = async(req, res) => {
+  try {
+    var email = req.body.email
+    var password = req.body.password
+    
+    var sha256 = crypto.createHash("sha256");
+    sha256.update(password, "utf8");//utf8 here
+    var pass = sha256.digest("base64");
+   
+    db.query("SELECT * FROM login WHERE email=? AND password=?", [email, pass], (err, result) => {
+      if (err) {
+       throw(err)
+      }
+      if (result.length>0) {
+        
+        res.send(result)
+        console.log("logined")
+        
+      } else {
+        console.log("user doesn't exist");
+      }
+
+    });
+  }
+
+  catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    })
+  };
+};

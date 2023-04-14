@@ -1,6 +1,7 @@
 const express = require('express');
 const db = require('./db')
 const cors = require('cors')
+const store = require("store2");
 var crypto = require("crypto");
 const { register } = require('./controllers/RegisterLogin');
 const routee = require('./routes/routes');
@@ -10,89 +11,10 @@ const PORT = 8000;
 app.use(cors());
 app.use(express.json())
 
-// Route to get all posts
-app.post("/register", (req, res) =>{
 
 
-
-  // try {
-  //   var email = req.body.email
-  //   var password = req.body.password
-  //   var sha256 = crypto.createHash("sha256");
-  //   sha256.update(password, "utf8");//utf8 here
-  //   var pass = sha256.digest("base64");
-  //   console.log(pass);
-
-
-  //   db.query("SELECT * FROM login WHERE email=? ", [email], (err, result) => {
-  //     if (err) {
-  //       console.log(err)
-  //     }
-  //     if (result.length > 0) {
-  //       res.send(result)
-  //       console.log("user exists")
-  //     } else {
-
-  //       db.query("INSERT INTO login (email,password)  VALUES (?, ?)", [email, pass], (err, result) => {
-  //         if (err) {
-  //           console.log(err)
-  //         }
-  //         res.send(result)
-  //         console.log(err)
-          
-  //       });
-
-
-  //     }
-
-  //   });
-
- 
-  // }
-
-  // catch (error) {
-  //   res.status(500).json({
-  //     success: false,
-  //     message: error.message,
-  //   })
-  // };
-});
 
 app.use("/api/route",routee);
-
-
-app.post("/login", (req, res) => {
-  try {
-    var email = req.body.email
-    var password = req.body.password
-    
-    var sha256 = crypto.createHash("sha256");
-    sha256.update(password, "utf8");//utf8 here
-    var pass = sha256.digest("base64");
-   
-    db.query("SELECT * FROM login WHERE email=? AND password=?", [email, pass], (err, result) => {
-      if (err) {
-       throw(err)
-      }
-      if (result.length>0) {
-        
-        res.send(result)
-        console.log("logined")
-        
-      } else {
-        console.log("user doesn't exist");
-      }
-
-    });
-  }
-
-  catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    })
-  };
-});
 
 
 

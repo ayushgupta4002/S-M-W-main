@@ -10,6 +10,7 @@ const sendMail = (email) => {
   console.log(otpgenerated);
 
    console.log(email);
+   var emailuser=email;
 
   var transport = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -26,7 +27,7 @@ const sendMail = (email) => {
 
   var mailOptions = {
     from: '"Ayush" <ayush4002gupta@gmail.com>',
-    to: 'harshulgupta56@gmail.com',
+    to: emailuser,
     subject: 'Nice Nodemailer test',
     text:`Hey there, This is your otp for verification : ${otpgenerated}`,
     html: `<b>Hey there! </b>This is your otp for verification : ${otpgenerated}`,
@@ -55,6 +56,7 @@ const sendMail = (email) => {
 
 
 }
+
 const deleteotp =(email)=>{
 
   var empty="";
