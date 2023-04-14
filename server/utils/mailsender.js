@@ -17,7 +17,7 @@ const sendMail = (email) => {
     port: 587,
     auth: {
       user: "ayush4002gupta@gmail.com",
-      pass: "zjeahkmnwwlzzthu"
+      pass: ""
     },
     tls: {
       rejectUnauthorized: false
