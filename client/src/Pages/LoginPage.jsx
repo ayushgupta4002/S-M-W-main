@@ -13,6 +13,7 @@ function LoginPage() {
 
 
     const  login=()=>{
+
         axios.post(baseurl+"/login", {
             email:email,
             password:pass
@@ -23,6 +24,21 @@ function LoginPage() {
 
 
            console.log("success");
+            }
+            console.log(Response)
+        })
+        
+    };
+    
+    const  googleauth=()=>{
+        window.location='http://localhost:8000/google'
+
+        
+        axios.get("http://localhost:8000/google/callback").then((Response)=>{
+            if (Response.status=200){
+                window.location='/home';
+
+                console.log("success")
             }
             console.log(Response)
         })
@@ -71,7 +87,7 @@ function LoginPage() {
                                         </div>
                                         <button class="bg-white items-center mt-5  rounded-l w-10/12 pt-2 pb-2 pl-2 pr-2 m-5 flex flex-row justify-evenly">
                                             <img class="w-[11%]" src="google.png"></img>
-                                                <p class=" text-gray-500 font-medium">Login with Google</p></button>
+                                                <p class=" text-gray-500 font-medium" onClick={googleauth}>Login with Google</p></button>
                                         <button> <a href=""><p class="mt-3 text-xs border-b py-4 mx-5 ">Forgot Your Password ?</p></a></button>
                                         <div class="mt-3 flex flex-row  justify-between m-3">
                                             <p class="mt-3 text-xs border-b py-1 pl-2  ">Don't have an Account ?</p>

@@ -21,6 +21,7 @@ exports.otpmain = async (req, res) => {
       if (result.length > 0) {
         res.send(result)
         console.log("user exists")
+       
         db.query("UPDATE login SET verified=TRUE WHERE otp=? ", [otp], (err, result) => {
           if (err) {
             console.log(err)
@@ -57,6 +58,7 @@ exports.register = async (req, res) => {
       if (result.length > 0) {
         res.send(result)
         console.log("user exists")
+        
       } else {
         db.query("SELECT * FROM login WHERE username=? ", [username], (err, result) => {
           if (err) {
@@ -65,6 +67,7 @@ exports.register = async (req, res) => {
           if (result.length > 0) {
             res.send(result)
             console.log("user with same username exists")
+           
           }
           else {
             db.query("INSERT INTO login (email,password,username,name)  VALUES (?, ?, ?, ?)", [email, pass,username,name], (err, result) => {
