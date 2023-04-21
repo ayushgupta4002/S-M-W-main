@@ -2,6 +2,8 @@ const db = require('../db');
 var crypto = require("crypto");
 const sendMail = require('../utils/mailsender');
 const store = require("store2");
+const jwt = require("jsonwebtoken");
+const secret="mynameisayush9999573562@123456789";
 
 exports.resendotp = async (req, res) => {
 
@@ -56,8 +58,11 @@ exports.register = async (req, res) => {
         console.log(err)
       }
       if (result.length > 0) {
-        res.send(result)
-        console.log("user exists")
+      
+        res.status(404).json({
+          success: false,
+          message: "user exists",
+        });
         
       } else {
         db.query("SELECT * FROM login WHERE username=? ", [username], (err, result) => {
@@ -65,8 +70,11 @@ exports.register = async (req, res) => {
             console.log(err)
           }
           if (result.length > 0) {
-            res.send(result)
-            console.log("user with same username exists")
+       
+            res.status(404).json({
+              success: false,
+              message: "user with same username exists",
+            });
            
           }
           else {
@@ -109,9 +117,23 @@ exports.login = async(req, res) => {
        throw(err)
       }
       if (result.length>0) {
+
+        const user = { email: result[0].email };
+        console.log(user);
+        const token = generateToken(user);
+        const options = {
+          expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
+          httpOnly: true,
+        };
+
         
-        res.send(result)
+        res.status(200).cookie("token", token, options).json({
+          success: true,
+          result,
+          token,
+        });
         console.log("logined")
+        console.log(token)
         
       } else {
         console.log("user doesn't exist");
@@ -127,3 +149,10 @@ exports.login = async(req, res) => {
     })
   };
 };
+
+
+
+
+function generateToken(user) {
+  return jwt.sign(user, secret);
+}

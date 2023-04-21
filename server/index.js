@@ -65,7 +65,7 @@ app.get('/google/callback',
                 console.log(err)
               }
               console.log(err)
-              
+              res.send(result);
               
             });
           }
