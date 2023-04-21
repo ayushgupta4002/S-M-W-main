@@ -3,7 +3,7 @@ import Homepage from '../Pages/Homepage'
 import { useState, useEffect } from 'react'
 
 function Navbar() {
-    const [login, setLogin] = useState(true)
+    const [login, setLogin] = useState(false)
     
   return (
     <nav class="flex sticky top-0  justify-between items-center w-[100%] px-4 border-bottom border-gray-600 bg-white mx-auto  ">
